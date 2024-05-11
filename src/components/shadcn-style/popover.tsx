@@ -1,6 +1,8 @@
 import * as PrimitivePopover from "@/components/primitives/popover";
 import { tm } from "@/components/tailwind-utils";
 
+const Popover = "div";
+
 const PopoverTrigger = PrimitivePopover.PopoverTrigger;
 
 const PopoverContent = ({
@@ -20,4 +22,4 @@ const PopoverContent = ({
   );
 };
 
-export { PopoverTrigger, PopoverContent };
+export { PopoverTrigger, PopoverContent, Popover };

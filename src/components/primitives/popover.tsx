@@ -1,29 +1,31 @@
-import type { HTMLProps, ReactNode } from "react";
+import type { HTMLProps, ReactNode, cache } from "react";
 import { Slot } from "@radix-ui/react-slot";
 
 type PopoverTriggerProps = {
   children: ReactNode;
   asChild?: boolean;
+  id: string;
 } & HTMLProps<HTMLButtonElement>;
 
 export const PopoverTrigger = ({
   children,
   asChild,
+  id,
   ...props
 }: PopoverTriggerProps) => {
   const Comp = asChild ? Slot : "button";
   return (
     <>
       <Comp
-        id={triggerId}
+        id={`popover-trigger-${id}`}
         // @ts-expect-error: React HTML doesn't support popovertarget yet
-        popovertarget={popoverId}
+        popovertarget={`popover-content-${id}`}
         popovertargetaction="toggle"
         {...props}
       >
         {children}
       </Comp>
-      <style>{triggerStyle}</style>
+      <style>{triggerStyle({ id })}</style>
     </>
   );
 };
@@ -34,6 +36,7 @@ export type PopoverContentProps = {
   side?: "top" | "bottom" | "left" | "right";
   sideOffset?: number;
   alignOffset?: number;
+  id: string;
 } & HTMLProps<HTMLDivElement>;
 
 export const PopoverContent = ({
@@ -42,25 +45,25 @@ export const PopoverContent = ({
   side = "bottom",
   alignOffset = 0,
   sideOffset = 0,
+  id,
   ...props
 }: PopoverContentProps) => {
   return (
     <>
       {/* @ts-expect-error: React HTML doesn't support popover yet */}
-      <div id={popoverId} popover="" {...props}>
+      <div id={`popover-content-${id}`} popover="" {...props}>
         {children}
       </div>
-      <style>{popoverStyle({ alignOffset, sideOffset, align, side })}</style>
+      <style>
+        {popoverStyle({ id, alignOffset, sideOffset, align, side })}
+      </style>
     </>
   );
 };
 
-const triggerId = `trigger-ulid`;
-const popoverId = `mypopover-ulid`;
-
-const triggerStyle = `
-	#${triggerId} {
-		anchor-name: --${triggerId};
+const triggerStyle = ({ id }: { id: string }) => `
+	#popover-trigger-${id} {
+		anchor-name: --popover-trigger-${id};
 	} 
 `;
 
@@ -90,14 +93,16 @@ const popoverStyle = ({
   alignOffset,
   side,
   align,
+  id,
 }: {
   side: "top" | "bottom" | "left" | "right";
   align: "start" | "center" | "end";
   sideOffset: number;
   alignOffset: number;
+  id: string;
 }) => `
-	#${popoverId} {
-		position-anchor: --${triggerId};
+	#popover-content-${id} {
+		position-anchor: --popover-trigger-${id};
 		inset: unset; 
 		${sideAlign({ sideOffset, alignOffset })[`${side}-${align}`]}
 	} 
