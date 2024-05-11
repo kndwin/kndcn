@@ -50,8 +50,8 @@ export const PopoverContent = ({
 }: PopoverContentProps) => {
   return (
     <>
-      {/* @ts-expect-error: React HTML doesn't support popover yet */}
-      <div id={`popover-content-${id}`} popover="" {...props}>
+      {/* @ts-expect-error: React 19 doesn't support popover yet */}
+      <div id={`popover-content-${id}`} popover="auto" {...props}>
         {children}
       </div>
       <style>

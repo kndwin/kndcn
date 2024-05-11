@@ -3,27 +3,42 @@ import type { ReactNode, HTMLProps } from "react";
 
 export type DialogTriggerProps = {
   asChild?: boolean;
+  targetId: string;
 } & HTMLProps<HTMLButtonElement>;
-export const DialogTrigger = ({ asChild, ...props }: DialogTriggerProps) => {
+export const DialogTrigger = ({
+  asChild,
+  targetId,
+  ...props
+}: DialogTriggerProps) => {
   const Comp = asChild ? Slot : "button";
   return (
     // @ts-expect-error: React HTML doesn't support popovertargetaction yet
-    <Comp popovertarget="mydialog" popovertargetaction="toggle" {...props} />
+    <Comp popovertarget={targetId} popovertargetaction="toggle" {...props} />
   );
 };
 
-export type DialogContentProps = HTMLProps<HTMLDialogElement>;
+export type DialogContentProps = {
+  id: string;
+} & HTMLProps<HTMLDialogElement>;
 export const DialogContent = (props: DialogContentProps) => {
   return (
     // @ts-expect-error: React HTML doesn't support popovertargetaction yet
-    <dialog id="mydialog" open="" popover="" {...props} />
+    <dialog popover="auto" {...props} />
   );
 };
 
-export type DialogCloseProps = HTMLProps<HTMLButtonElement>;
-export const DialogClose = (props: DialogCloseProps) => {
+export type DialogCloseProps = {
+  targetId: string;
+  asChild?: boolean;
+} & HTMLProps<HTMLButtonElement>;
+export const DialogClose = ({
+  targetId,
+  asChild,
+  ...props
+}: DialogCloseProps) => {
+  const Comp = asChild ? Slot : "button";
   return (
     // @ts-expect-error: React HTML doesn't support popovertargetaction yet
-    <button popovertarget="mydialog" popovertargetaction="hide" {...props} />
+    <Comp popovertarget={targetId} popovertargetaction="hide" {...props} />
   );
 };

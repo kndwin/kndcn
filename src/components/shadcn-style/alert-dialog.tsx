@@ -1,17 +1,20 @@
 import type { HTMLProps } from "react";
 import * as PrimitiveDialog from "@/components/primitives/dialog";
 import { cn } from "./lib";
+import { buttonVariants } from "./button";
 
-const Dialog = "div";
+const AlertDialog = "div";
 
-const DialogTrigger = PrimitiveDialog.DialogTrigger;
+const AlertDialogTrigger = PrimitiveDialog.DialogTrigger;
 
-const DialogContent = ({
+const AlertDialogContent = ({
   className,
   ...props
 }: PrimitiveDialog.DialogContentProps) => {
   return (
     <PrimitiveDialog.DialogContent
+      // @ts-expect-error: React 19 doesn't support HTML yet
+      popover="manual"
       className={cn(
         className,
         "backdrop:bg-black/80 backdrop:animate-fade-in w-full max-w-lg ",
@@ -26,7 +29,10 @@ const DialogContent = ({
   );
 };
 
-const DialogHeader = ({ className, ...props }: HTMLProps<HTMLDivElement>) => (
+const AlertDialogHeader = ({
+  className,
+  ...props
+}: HTMLProps<HTMLDivElement>) => (
   <div
     className={cn(
       "flex flex-col space-y-1.5 text-center sm:text-left",
@@ -36,22 +42,45 @@ const DialogHeader = ({ className, ...props }: HTMLProps<HTMLDivElement>) => (
   />
 );
 
-const DialogTitle = ({
+const AlertDialogTitle = ({
   className,
   ...props
 }: HTMLProps<HTMLHeadingElement>) => (
   <h2 className={cn("text-lg font-semibold", className)} {...props} />
 );
 
-const DialogClose = PrimitiveDialog.DialogClose;
-
-const DialogDescription = ({
+const AlertDialogDescription = ({
   className,
   ...props
 }: HTMLProps<HTMLParagraphElement>) => (
   <p className={cn("text-sm text-muted-foreground", className)} {...props} />
 );
-const DialogFooter = ({ className, ...props }: HTMLProps<HTMLDivElement>) => (
+
+const AlertDialogCancel = ({
+  className,
+  ...props
+}: PrimitiveDialog.DialogCloseProps) => (
+  <PrimitiveDialog.DialogClose
+    className={cn(
+      buttonVariants({ variant: "outline" }),
+      "mt-2 sm:mt-0",
+      className
+    )}
+    {...props}
+  />
+);
+
+const AlertDialogAction = ({
+  className,
+  ...props
+}: PrimitiveDialog.DialogCloseProps) => (
+  <PrimitiveDialog.DialogClose className={cn(buttonVariants())} {...props} />
+);
+
+const AlertDialogFooter = ({
+  className,
+  ...props
+}: HTMLProps<HTMLDivElement>) => (
   <div
     className={cn(
       className,
@@ -62,12 +91,13 @@ const DialogFooter = ({ className, ...props }: HTMLProps<HTMLDivElement>) => (
 );
 
 export {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogClose,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogCancel,
+  AlertDialogAction,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
 };
