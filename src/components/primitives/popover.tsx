@@ -16,6 +16,7 @@ export const PopoverTrigger = ({
     <>
       <Comp
         id={triggerId}
+        // @ts-expect-error: React HTML doesn't support popovertarget yet
         popovertarget={popoverId}
         popovertargetaction="toggle"
         {...props}
@@ -45,6 +46,7 @@ export const PopoverContent = ({
 }: PopoverContentProps) => {
   return (
     <>
+      {/* @ts-expect-error: React HTML doesn't support popover yet */}
       <div id={popoverId} popover="" {...props}>
         {children}
       </div>
