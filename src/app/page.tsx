@@ -83,7 +83,7 @@ function AccordionPreview() {
         <AccordionItem value="item-3">
           <AccordionTrigger>Is it animated?</AccordionTrigger>
           <AccordionContent>
-            Yes. It's animated by default, but you can disable it if you prefer.
+            {`Yes. It's animated by default, but you can disable it if you prefer.`}
           </AccordionContent>
         </AccordionItem>
       </Accordion>
@@ -131,7 +131,7 @@ function DialogPreview() {
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
+              {`Make changes to your profile here. Click save when you're done.`}
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
