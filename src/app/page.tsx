@@ -26,11 +26,25 @@ import {
   AlertDialogTrigger,
 } from "@/components/shadcn-style/alert-dialog";
 import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/shadcn-style/card";
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/shadcn-style/accordion";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/shadcn-style/tabs";
 import { Label } from "@/components/shadcn-style/label";
 import { Input } from "@/components/shadcn-style/input";
 
@@ -52,8 +66,8 @@ export default function Home() {
           server-side rendering and client-side interactivity.
         </p>
 
+        <TabsPreview />
         <AccordionPreview />
-        <ButtonPreview />
         <PopoverPreview />
         <DialogPreview />
         <AlertDialogPreview />
@@ -62,31 +76,99 @@ export default function Home() {
   );
 }
 
+function TabsPreview() {
+  return (
+    <section className="py-4 mt-4">
+      <h2 className="text-xl font-bold mb-2">Tabs</h2>
+      <div className="p-4 border rounded min-h-60 flex items-center justify-center">
+        <Tabs className="w-[400px]">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger name="tabs-preview" value="account" defaultOpen>
+              Account
+            </TabsTrigger>
+            <TabsTrigger name="tabs-preview" value="password">
+              Password
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="account">
+            <Card>
+              <CardHeader>
+                <CardTitle>Account</CardTitle>
+                <CardDescription>
+                  {`Make changes to your account here. Click save when you're done.`}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="space-y-1">
+                  <Label htmlFor="name">Name</Label>
+                  <Input id="name" defaultValue="Pedro Duarte" />
+                </div>
+                <div className="space-y-1">
+                  <Label htmlFor="username">Username</Label>
+                  <Input id="username" defaultValue="@peduarte" />
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button>Save changes</Button>
+              </CardFooter>
+            </Card>
+          </TabsContent>
+          <TabsContent value="password">
+            <Card>
+              <CardHeader>
+                <CardTitle>Password</CardTitle>
+                <CardDescription>
+                  {`Change your password here. After saving, you'll be logged out.`}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="space-y-1">
+                  <Label htmlFor="current">Current password</Label>
+                  <Input id="current" type="password" />
+                </div>
+                <div className="space-y-1">
+                  <Label htmlFor="new">New password</Label>
+                  <Input id="new" type="password" />
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button>Save password</Button>
+              </CardFooter>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
+    </section>
+  );
+}
+
 function AccordionPreview() {
   return (
-    <section className="py-4">
-      <h2 className="text-xl font-bold">Accordion</h2>
-      <Accordion>
-        <AccordionItem value="item-1">
-          <AccordionTrigger>Is it accessible?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-2">
-          <AccordionTrigger>Is it styled?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It comes with default styles that matches the other
-            components&apos; aesthetic.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-3">
-          <AccordionTrigger>Is it animated?</AccordionTrigger>
-          <AccordionContent>
-            {`Yes. It's animated by default, but you can disable it if you prefer.`}
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+    <section className="py-4 mt-4">
+      <h2 className="text-xl font-bold mb-2">Accordion</h2>
+      <div className="p-4 border rounded min-h-60 flex items-center justify-center">
+        <Accordion className="w-80">
+          <AccordionItem value="item-1">
+            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionContent>
+              Yes. It adheres to the WAI-ARIA design pattern.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger>Is it styled?</AccordionTrigger>
+            <AccordionContent>
+              Yes. It comes with default styles that matches the other
+              components&apos; aesthetic.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger>Is it animated?</AccordionTrigger>
+            <AccordionContent>
+              {`Yes. It's animated by default, but you can disable it if you prefer.`}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
     </section>
   );
 }
@@ -94,26 +176,28 @@ function AccordionPreview() {
 function AlertDialogPreview() {
   const id = "alert-dialog-preview";
   return (
-    <section className="py-4">
-      <h2 className="text-xl font-bold">Alert Dialog</h2>
-      <AlertDialog>
-        <AlertDialogTrigger targetId={id} asChild>
-          <Button>Open dialog</Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent id={id}>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </AlertDialogDescription>
-            <AlertDialogFooter>
-              <AlertDialogCancel targetId={id}>Cancel</AlertDialogCancel>
-              <AlertDialogAction targetId={id}>Confirm</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogHeader>
-        </AlertDialogContent>
-      </AlertDialog>
+    <section className="py-4 mt-4">
+      <h2 className="text-xl font-bold mb-2">Alert Dialog</h2>
+      <div className="p-4 border rounded min-h-60 flex items-center justify-center">
+        <AlertDialog>
+          <AlertDialogTrigger targetId={id} asChild>
+            <Button>Open dialog</Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent id={id}>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
+              </AlertDialogDescription>
+              <AlertDialogFooter>
+                <AlertDialogCancel targetId={id}>Cancel</AlertDialogCancel>
+                <AlertDialogAction targetId={id}>Confirm</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogHeader>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     </section>
   );
 }
@@ -121,168 +205,65 @@ function AlertDialogPreview() {
 function DialogPreview() {
   const id = "dialog-preview";
   return (
-    <section className="py-4">
-      <h2 className="text-xl font-bold">Dialog</h2>
-      <Dialog>
-        <DialogTrigger targetId={id} asChild>
-          <Button>Open dialog</Button>
-        </DialogTrigger>
-        <DialogContent id={id}>
-          <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>
-              {`Make changes to your profile here. Click save when you're done.`}
-            </DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input id="name" value="Pedro Duarte" className="col-span-3" />
+    <section className="py-4 mt-4">
+      <h2 className="text-xl font-bold mb-2">Dialog</h2>
+      <div className="p-4 border rounded min-h-60 flex items-center justify-center">
+        <Dialog>
+          <DialogTrigger targetId={id} asChild>
+            <Button>Open dialog</Button>
+          </DialogTrigger>
+          <DialogContent id={id}>
+            <DialogHeader>
+              <DialogTitle>Edit profile</DialogTitle>
+              <DialogDescription>
+                {`Make changes to your profile here. Click save when you're done.`}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="name" className="text-right">
+                  Name
+                </Label>
+                <Input id="name" value="Pedro Duarte" className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="username" className="text-right">
+                  Username
+                </Label>
+                <Input id="username" value="@peduarte" className="col-span-3" />
+              </div>
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
-                Username
-              </Label>
-              <Input id="username" value="@peduarte" className="col-span-3" />
-            </div>
-          </div>
-          <DialogFooter>
-            <DialogClose asChild targetId={id}>
-              <Button>Save changes</Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </section>
-  );
-}
-
-function ButtonPreview() {
-  return (
-    <section className="py-4">
-      <h2 className="text-xl font-bold">Buttons</h2>
-      <div className="flex space-x-4">
-        <Button>Primary</Button>
-        <Button variant="secondary">Secondary</Button>
-        <Button variant="destructive">Destructive</Button>
-        <Button variant="outline">Outline</Button>
-        <Button variant="ghost">Ghost</Button>
-        <Button variant="link">Link</Button>
+            <DialogFooter>
+              <DialogClose asChild targetId={id}>
+                <Button>Save changes</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );
 }
+
 function PopoverPreview() {
-  const alignOffset = 4;
   return (
-    <section className="py-4">
-      <h2 className="text-xl font-bold">Popover</h2>
-      <div className="flex space-x-4">
+    <section className="py-4 mt-4">
+      <h2 className="text-xl font-bold mb-2">Popover</h2>
+      <div className="p-4 border rounded min-h-60 flex items-center justify-center">
         <Popover>
-          <PopoverTrigger id="top-start" asChild>
-            <Button className="w-32">Top start</Button>
+          <PopoverTrigger id="bottom-center" asChild>
+            <Button className="w-32">Bottom center</Button>
           </PopoverTrigger>
           <PopoverContent
-            id="top-start"
-            side="top"
-            align="start"
+            id="bottom-center"
+            side="bottom"
+            align="center"
             sideOffset={4}
             className="w-80"
           >
             <PopoverContentExample />
           </PopoverContent>
         </Popover>
-        <PopoverTrigger id="top-center" asChild>
-          <Button className="w-32">Top center</Button>
-        </PopoverTrigger>
-        <PopoverContent
-          id="top-center"
-          side="top"
-          align="center"
-          sideOffset={4}
-          className="w-80"
-        >
-          <PopoverContentExample />
-        </PopoverContent>
-        <PopoverTrigger id="top-end" asChild>
-          <Button className="w-32">Top end</Button>
-        </PopoverTrigger>
-        <PopoverContent
-          id="top-end"
-          side="top"
-          align="end"
-          sideOffset={4}
-          className="w-80"
-        >
-          <PopoverContentExample />
-        </PopoverContent>
-      </div>
-      <div className="flex space-x-4 my-4">
-        <PopoverTrigger id="left-center" asChild>
-          <Button className="w-32">Left center</Button>
-        </PopoverTrigger>
-        <PopoverContent
-          id="left-center"
-          side="left"
-          align="center"
-          sideOffset={4}
-          className="w-80"
-        >
-          <PopoverContentExample />
-        </PopoverContent>
-        <div className="w-32" />
-        <PopoverTrigger id="right-center" asChild>
-          <Button className="w-32">Right center</Button>
-        </PopoverTrigger>
-        <PopoverContent
-          id="right-center"
-          side="right"
-          align="center"
-          sideOffset={4}
-          className="w-80"
-        >
-          <PopoverContentExample />
-        </PopoverContent>
-      </div>
-      <div className="flex space-x-4">
-        <PopoverTrigger id="bottom-start" asChild>
-          <Button className="w-32">Bottom start</Button>
-        </PopoverTrigger>
-        <PopoverContent
-          id="bottom-start"
-          side="bottom"
-          align="start"
-          sideOffset={4}
-          className="w-80"
-        >
-          <PopoverContentExample />
-        </PopoverContent>
-        <PopoverTrigger id="bottom-center" asChild>
-          <Button className="w-32">Bottom center</Button>
-        </PopoverTrigger>
-        <PopoverContent
-          id="bottom-center"
-          side="bottom"
-          align="center"
-          sideOffset={4}
-          className="w-80"
-        >
-          <PopoverContentExample />
-        </PopoverContent>
-        <PopoverTrigger id="bottom-end" asChild>
-          <Button className="w-32">Bottom end</Button>
-        </PopoverTrigger>
-        <PopoverContent
-          id="bottom-end"
-          side="bottom"
-          align="end"
-          sideOffset={4}
-          className="w-80"
-        >
-          <PopoverContentExample />
-        </PopoverContent>
       </div>
     </section>
   );

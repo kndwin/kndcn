@@ -8,7 +8,7 @@ const AccordionItem = ({
   ...props
 }: PrimitiveAccordion.AccordionItemProps) => (
   <PrimitiveAccordion.AccordionItem
-    className={cn("border-b", className)}
+    className={cn("border-b group", className)}
     {...props}
   />
 );
@@ -33,8 +33,7 @@ const AccordionContent = ({
 }: PrimitiveAccordion.AccordionContentProps) => (
   <PrimitiveAccordion.AccordionContent
     className={cn(
-      (className =
-        "overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"),
+      "overflow-hidden text-sm [group:open]:animate-accordion-down",
       className
     )}
     {...props}

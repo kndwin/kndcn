@@ -17,8 +17,8 @@ const AlertDialogContent = ({
       popover="manual"
       className={cn(
         className,
-        "backdrop:bg-black/80 backdrop:animate-fade-in w-full max-w-lg ",
-        "inset-[unset] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
+        "backdrop:bg-black/80 backdrop:animate-fade-in backdrop:pointer-events-none",
+        "inset-[unset] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg",
         "gap-4 border bg-background p-6 shadow-lg duration-200 rounded sm:rounded-lg",
         "animate-fade-in"
       )}

@@ -1,7 +1,7 @@
 import type { HTMLProps, ReactNode, cache } from "react";
 import { Slot } from "@radix-ui/react-slot";
 
-type PopoverTriggerProps = {
+export type PopoverTriggerProps = {
   children: ReactNode;
   asChild?: boolean;
   id: string;
